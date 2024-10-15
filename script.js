@@ -8,8 +8,8 @@ function toggleStrikeThrough(checkbox, taskText) {
     } else {
         taskText.classList.remove('strike-through');
     }
-    saveTasksToLocalStorage(); // Save tasks to local storage after toggle
-    updateTaskCount(); // Update task count after toggling
+    saveTasksToLocalStorage();
+    updateTaskCount();
 }
 
 // Load saved tasks from local storage when the page is loaded
@@ -17,27 +17,27 @@ document.addEventListener('DOMContentLoaded', loadTasksFromLocalStorage);
 
 // Function to load tasks from local storage
 function loadTasksFromLocalStorage() {
-    const tasks = JSON.parse(localStorage.getItem('tasks')) || []; // Get tasks or initialize to empty array
+    const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
     tasks.forEach(task => {
-        addTaskToDOM(task.text, task.completed); // Add each task to the DOM
+        addTaskToDOM(task.text, task.completed);
     });
-    updateTaskCount(); // Update task count after loading tasks
+    updateTaskCount();
 }
 
 // Save tasks to local storage
 function saveTasksToLocalStorage() {
     const tasks = [];
     document.querySelectorAll('.box_task').forEach(taskBox => {
-        const text = taskBox.querySelector('.note_text').textContent; // Get task text
-        const completed = taskBox.querySelector('.readyTask').checked; // Get task completion status
+        const text = taskBox.querySelector('.note_text').textContent;
+        const completed = taskBox.querySelector('.readyTask').checked;
         tasks.push({ text, completed }); // Push task object to tasks array
     });
-    localStorage.setItem('tasks', JSON.stringify(tasks)); // Save tasks array to local storage
+    localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
 // Function to add a new task
 function addFunction() {
-    let newTask = document.getElementById('newNote').value; // Get value from input
+    let newTask = document.getElementById('newNote').value;
 
     // Alert if the input is empty
     if (newTask.trim() === "") {
@@ -45,114 +45,114 @@ function addFunction() {
         return;
     }
 
-    addTaskToDOM(newTask, false); // Add new task to DOM as incomplete
-    saveTasksToLocalStorage(); // Save tasks to local storage
+    addTaskToDOM(newTask, false);
+    saveTasksToLocalStorage();
 
-    document.getElementById('newNote').value = ''; // Clear input field
-    updateTaskCount(); // Update task count after adding new task
+    document.getElementById('newNote').value = '';
+    updateTaskCount();
 }
 
 // Function to add a task element to the DOM
 function addTaskToDOM(taskTextValue, isCompleted) {
-    const taskBox = document.createElement('div'); // Create task box
-    taskBox.className = 'box_task'; // Assign class name to task box
+    const taskBox = document.createElement('div');
+    taskBox.className = 'box_task';
 
-    const taskContent = document.createElement('div'); // Create task content container
-    taskContent.className = 'task_content'; // Assign class name to task content
+    const taskContent = document.createElement('div');
+    taskContent.className = 'task_content';
 
-    const taskCheck = document.createElement('input'); // Create checkbox
-    taskCheck.className = 'readyTask'; // Assign class name to checkbox
-    taskCheck.type = 'checkbox'; // Set type to checkbox
-    taskCheck.checked = isCompleted; // Set checkbox checked state based on task completion
+    const taskCheck = document.createElement('input');
+    taskCheck.className = 'readyTask';
+    taskCheck.type = 'checkbox';
+    taskCheck.checked = isCompleted;
 
     // Create a paragraph element for task text
     const taskText = document.createElement('p');
-    taskText.className = 'note_text'; // Assign class name to task text
-    taskText.textContent = taskTextValue; // Set task text content
+    taskText.className = 'note_text';
+    taskText.textContent = taskTextValue;
 
     // If task is completed, apply the strike-through style
     if (isCompleted) {
-        taskText.classList.add('strike-through'); // Add strike-through style for completed tasks
+        taskText.classList.add('strike-through');
     }
 
     // Event listener for checkbox to toggle strike-through
     taskCheck.addEventListener('change', function () {
-        toggleStrikeThrough(taskCheck, taskText); // Call toggle function on checkbox change
+        toggleStrikeThrough(taskCheck, taskText);
     });
 
-    const taskEdit = document.createElement('textarea'); // Create textarea for editing task
-    taskEdit.className = 'editTask'; // Assign class name to textarea
-    taskEdit.style.display = 'none'; // Hide textarea by default
+    const taskEdit = document.createElement('textarea');
+    taskEdit.className = 'editTask';
+    taskEdit.style.display = 'none';
 
-    const btnBox = document.createElement('div'); // Create button box for edit and delete buttons
-    btnBox.className = 'btn_box'; // Assign class name to button box
+    const btnBox = document.createElement('div');
+    btnBox.className = 'btn_box';
 
     // Create edit button
     const buttonEdit = document.createElement("button");
-    buttonEdit.className = "edit_btn"; // Assign class name to edit button
+    buttonEdit.className = "edit_btn";
     buttonEdit.onclick = function () {
-        editFunction(buttonEdit); // Call edit function on button click
+        editFunction(buttonEdit);
     };
 
-    const iconEdit = document.createElement("i"); // Create edit icon
-    iconEdit.className = "bx bx-edit"; // Assign class name to edit icon
-    buttonEdit.appendChild(iconEdit); // Append icon to edit button
+    const iconEdit = document.createElement("i");
+    iconEdit.className = "bx bx-edit";
+    buttonEdit.appendChild(iconEdit);
 
     // Create delete button
     const buttonDel = document.createElement("button");
-    buttonDel.className = "del_btn"; // Assign class name to delete button
+    buttonDel.className = "del_btn";
     buttonDel.onclick = function () {
-        taskBox.remove(); // Remove task box from DOM
-        saveTasksToLocalStorage(); // Save tasks to local storage
-        updateTaskCount(); // Update task count after deletion
+        taskBox.remove();
+        saveTasksToLocalStorage();
+        updateTaskCount();
     };
 
-    const iconDel = document.createElement("i"); // Create delete icon
-    iconDel.className = "bx bx-trash"; // Assign class name to delete icon
-    buttonDel.appendChild(iconDel); // Append icon to delete button
+    const iconDel = document.createElement("i");
+    iconDel.className = "bx bx-trash";
+    buttonDel.appendChild(iconDel);
 
     // Append all elements together
-    taskContent.appendChild(taskCheck); // Append checkbox to task content
-    taskContent.appendChild(taskText); // Append task text to task content
-    btnBox.appendChild(buttonEdit); // Append edit button to button box
-    btnBox.appendChild(buttonDel); // Append delete button to button box
-    taskBox.appendChild(taskContent); // Append task content to task box
-    taskBox.appendChild(taskEdit); // Append textarea to task box
-    taskBox.appendChild(btnBox); // Append button box to task box
+    taskContent.appendChild(taskCheck);
+    taskContent.appendChild(taskText);
+    btnBox.appendChild(buttonEdit);
+    btnBox.appendChild(buttonDel);
+    taskBox.appendChild(taskContent);
+    taskBox.appendChild(taskEdit);
+    taskBox.appendChild(btnBox);
 
     // Add new tasks at the bottom of the task list
     const taskList = document.querySelector('.task_list');
-    taskList.appendChild(taskBox); // Append task box to task list
+    taskList.appendChild(taskBox);
 }
 
 // Edit function for tasks
 function editFunction(buttonEdit) {
-    const taskBox = buttonEdit.closest('.box_task'); // Get closest task box
-    const taskText = taskBox.querySelector('.note_text'); // Get task text
-    const taskEdit = taskBox.querySelector('.editTask'); // Get textarea for editing
+    const taskBox = buttonEdit.closest('.box_task');
+    const taskText = taskBox.querySelector('.note_text');
+    const taskEdit = taskBox.querySelector('.editTask');
 
     // Toggle edit mode
     if (taskEdit.style.display === 'none') {
-        taskEdit.value = taskText.textContent; // Set textarea value to task text
-        taskEdit.style.display = 'block'; // Show textarea
-        taskText.style.display = 'none'; // Hide task text
-        buttonEdit.innerHTML = '<i class="bx bx-check"></i>'; // Change edit button to check icon
+        taskEdit.value = taskText.textContent;
+        taskEdit.style.display = 'block';
+        taskText.style.display = 'none';
+        buttonEdit.innerHTML = '<i class="bx bx-check"></i>';
     } else {
-        taskText.textContent = taskEdit.value; // Update task text with edited value
-        taskEdit.style.display = 'none'; // Hide textarea
-        taskText.style.display = 'block'; // Show task text
-        buttonEdit.innerHTML = '<i class="bx bx-edit"></i>'; // Change check button back to edit icon
-        saveTasksToLocalStorage(); // Save tasks to local storage after editing
+        taskText.textContent = taskEdit.value;
+        taskEdit.style.display = 'none';
+        taskText.style.display = 'block';
+        buttonEdit.innerHTML = '<i class="bx bx-edit"></i>';
+        saveTasksToLocalStorage();
     }
 }
 
 // Update task count
 function updateTaskCount() {
-    const totalTasks = document.querySelectorAll('.box_task').length; // Get total number of tasks
-    const completedTasks = document.querySelectorAll('.box_task .readyTask:checked').length; // Get number of completed tasks
+    const totalTasks = document.querySelectorAll('.box_task').length;
+    const completedTasks = document.querySelectorAll('.box_task .readyTask:checked').length;
 
     // Calculate active tasks
-    const activeTasks = totalTasks - completedTasks; // Active tasks are total tasks minus completed tasks
+    const activeTasks = totalTasks - completedTasks;
 
     // Update display of active tasks count
     numbering.textContent = activeTasks;
