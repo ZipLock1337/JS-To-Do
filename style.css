@@ -1,0 +1,203 @@
+/* General style */
+
+html {
+    box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+
+    font-family: "Chivo Mono", monospace;
+    font-optical-sizing: auto;
+
+    background: linear-gradient(90deg, rgb(0, 0, 200), rgb(128, 0, 128));
+}
+
+/* Main style */
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.node_box {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    height: 600px;
+
+    background-color: rgb(235, 235, 235);
+    border-radius: 12px;
+}
+
+.task_list {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.node_name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+    margin-bottom: 25px;
+    font-size: 25px;
+}
+
+.custome-notepad {
+    margin-left: 12px;
+}
+
+.node_input {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+#newNote {
+    width: 300px;
+    height: 35px;
+    background-color: gainsboro;
+    border: none;
+    outline: none;
+    border-radius: 12px;
+    padding-right: 30px;
+    padding-left: 12px;
+    transition: box-shadow .3s ease-in;
+}
+
+#newNote:focus {
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.btn_add {
+    position: absolute;
+    top: 0;
+    right: 60px;
+    height: 100%;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 0 12px 12px 0;
+    padding: 0 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn_add:hover {
+    background-color: #000;
+}
+
+.num_task {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin: 20px 0;
+}
+
+#numTask {
+    margin: 0 5px;
+}
+
+/* Ready task */
+
+.editTask {
+    display: none;
+}
+
+.box_task {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    width: 300px;
+    margin: 0 auto;
+    background-color: #f9f9f9;
+}
+
+.box_task:not(:last-child) {
+    margin-bottom: 20px;
+}
+
+.task_content {
+    display: flex;
+}
+
+.readyTask {
+    margin-right: 12px;
+}
+
+/* Btn style */
+
+.btn_box {
+    display: flex;
+    gap: 15px;
+}
+
+.edit_btn,
+.del_btn {
+    width: 50px;
+    height: 30px;
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.del_btn {
+    background-color: #ff0000;
+    color: white;
+}
+
+.edit_btn {
+    background-color: #007bff;
+    color: white;
+}
+
+.del_btn:hover,
+.edit_btn:hover {
+    transform: scale(1.1);
+}
+
+/* for script */
+
+.strike-through {
+    text-decoration: line-through;
+    color: gray;
+}
+
+.editTask {
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    outline: none;
+    font-size: 18px;
+    background-color: #fff;
+    width: 100%;
+    padding: 12px 15px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 12px;
+}
+
+.editTask:hover {
+    border-color: #aaa;
+}
+
+.editTask:focus {
+    border-color: #007bff;
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2);
+}
