@@ -29,7 +29,7 @@ body {
     height: 100vh;
 }
 
-.node_box {
+.note_box {
     display: flex;
     flex-direction: column;
     width: 500px;
@@ -44,7 +44,7 @@ body {
     overflow-y: auto;
 }
 
-.node_name {
+.note_name {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -57,7 +57,7 @@ body {
     margin-left: 12px;
 }
 
-.node_input {
+.note_input {
     position: relative;
     display: flex;
     justify-content: center;
